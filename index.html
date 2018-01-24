@@ -1,0 +1,89 @@
+  <!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+	<head>
+			<title>Project 1 - Kimberly Tanaka</title>
+			<link rel = "stylesheet" href = "stylesheet.css"/>
+			<script src="js/d3.js"></script>
+	    <script src="js/jquery.js"></script>
+	    <script src="js/topojson.v2.min.js"></script>
+      <script src="js/d3-scale-chromatic.v1.min"></script>
+			
+	</head>
+	<body>
+		<header>
+			<h1>The Cost of Medical Treatment</h1>
+			<h2>Kimberly Tanaka </h2>
+			<h3>ECS 163 Project 1</h3>
+			<h3>02/08/2017</h3>
+		</header>
+
+  <hr>
+
+    <div class = "introduction" background-color = "white">
+      <h2>Introduction</h2>
+      <p>The dataset that I chose to visualize is the "Inpatient Prospective Payment System (IPPS) Provider Level Charges and Medicare Payments for the Top 100 Diagnosis-Related Groups (DRG)," a government-published dataset found <a href = "https://data.cms.gov/Medicare/Inpatient-Prospective-Payment-System-IPPS-Provider/97k6-zzx3">here</a>.  It was produced by the Centers for Medicare and Medicaid (CMS), a branch of the Department of Health and Human services.  For the 100 most common diagnoses, provides information on the cost of treating the condition in terms of the medical charges from the hospital (i.e. health services provider), the amount that Medicare pays, and the total amount that eventually gets paid (both by Medicare and other sources, most likely the patient and their family).  Although the larger dataset provided information on the hospital level, looking at what each individual hospital charges for each kind of treatment, the summarized averages were enough to work with.  This dataset is from 2011, about five years ago.  Since the dataset is from Medicare, the population being considered (i.e. those under Medicare coverage) may not be entirely representative of the population of America.  Aside from these two factors that may affect the validity of any conclusions drawn from the data, the dataset is well-curated and very informative.
+      <br>In looking at this dataset, I want to answer the big question of what the cost of medical treatment is, and see how that varies based on state or conditon.
+      </p>
+
+    </div>
+  
+
+    <div id = "block1" class = "chartContainer">
+    <h2>What are the most common treatments and what do they cost us?</h2>
+      <div id = "chart1" class = "chart"></div>
+      <div id = "tooltip"></div>
+      <p>
+This visualization plots the 100 medical procedures given in the dataset as circles on two axes, the vertical axis being the number of procedures, and the average cost of that type of procedure on the horizontal axis.  The size of the circle represents the total cost of the procedure to the general populace (i.e. Medicare), the product of the procedure frequency and the average cost.  Hovering over the circle brings up a tooltip that contains information on the treatment it represent.  
+<br>
+This visualization reveals that the distribution of the 100 most common procedures falls into the three main categories:  procedures that are expensive but uncommon, ones that are common but inexpensive, and ones that are uncommon and inexpensive.  Thankfully, there do not seem to be any procedures in the top right quadrant of the graph, so there are no extremely expensive procedures that are also extremely common.  It seems that the procedure that costs the American populace the most as a whole is joint replacements, which cost about $15,000 each.  However, since this is Medicare data, the population represented may be older than average.
+      </p>
+    </div>
+
+	    <script src="js/chart1.js"></script>	
+
+    <div id = "block2" class = "chartContainer">
+    <h2>How do hospital charges compare to what Medicare and the patient pay?</h2>
+      <div id = "chart2" class = "chart"></div>
+      <div id = "tooltip2"></div>
+        <div class = "buttonContainer">
+        <p><span style="padding-left:30px;"></span><b>Compare:</b> <span style="padding-left:15px;"></span>
+        <button id = "medicareButton">Medicare Payments (Align Left)</button><span style="padding-left:15px;"></span>
+           <button id = "hospitalButton">Hospital Bills (Align Center)</button><span style="padding-left:15px;"></span>
+           <button id = "patientButton">Cost to Patient (Align Right)</button>
+        </p>
+        </div>      
+      <p>As I was looking at the data, I saw that there were three different cost values provided for each medical treatment.  One was what the hospital charged, one was what Medicare paid, and the third was the total payments made for that treatment, including Medicare's.  By subtracting Medicare's contribution, I was able to determine how much the treatment cost the patient.  I chose the top 24 or so most common medical treatments, and made bars representing the hospital's charges, and then two bars on the sides cutting into the hospital charge bar to represent how much Medicare and the patient pay. The bars are ordered from most expensive to least expensive procedures.  The width of the bar is proportional to the frequency of the procedure.  As with before, hovering over the bars with the mouse opens a tooltip with the name of the treatment.  I also built in interactivity that allows the bars to be shifted left, right, and center, so that the medicare payments, the cost to the patient, and the hospital bills can be compared between treatments.
+      <br>
+      What I found interesting was that the cost to the patient remains fairly constant, even when the hospital's charge and the amount Medicare pays increase. Also, the red in between the blue and green bars represents the unpaid hospital charges, which are surprisingly large.
+    </p>
+    </div>
+
+    <script src="js/chart2.js"></script>	
+
+    <div id = "block3" class = "chartContainer">
+    <h2>Which states have the highest heathcare costs?</h2>
+      <div id = "chart3" class = "chart"></div>      
+      <div class = "buttonContainer">
+        <p><span style="padding-left:60px;"></span><b>Explore:</b> <span style="padding-left:60px;"></span>
+           <button id = "chargeButton">Hospital Charges</button><span style="padding-left:60px;"></span>
+           <button id = "medButton">Medicare Payments</button><span style="padding-left:60px;"></span>
+           <button id = "patButton">Cost to Patients</button>
+        </p>
+      </div>
+      <p>
+      After seeing how the medical costs varied from procedure to procedure, I wanted to see what the variations were between states, since the dataset included geographical information on the hospitals and their charges.  I calculated the average hospital charge, the average Medicare payment, and the average cost to the patient across all procedures, first for each state, then calculated the national average charges across all procedures.  This visualization is actually three in one, comparing the hospital charges, the Medicare payments, and the cost to the patient,  and the visualization can be toggled in between these three options via the buttons below it.
+<br>
+  This kind of visualization is known as a choropleth map, where regions (in this case, states), are colored based on a statistical variable.  I colored the states based on how much the expense varied from average, with red being a higher than average cost, blue being a lower than average cost, and white being around average.  A key that relates color to the actual values is placed in the top right corner.  This was done for the hospital charges, the Medicare payments, and the cost to the patient.
+<br>
+Some interesting trends I saw were that in the Medicare payments map, it looks like the southeast region gets less Medicare money per procedure than California or Alaska.  But it might also mean that people there are healther so the medical conditions there are less serious and require less drastic treatments.  California's  hospitals charge the most, which makes sense since the cost of living in California is so high.  Interestingly though, when we look at the map of the cost to patients, California is blue, so less than the national average.  In general, the cost to the patient is between one and two thousand dollars per procedure, with fairly little variation, as we saw in the second visualization.  It seems this trend of little variation in cost to the patient holds between states as well, although it looks like (with the exception of California), residents of western states pay more for each medical procedure than their eastern counterparts.   I found this visualization and the trends it revealed the most interesting out the three visualisations that I made.
+<br>
+      The geographical information was generated by Eric Celeste of St. Paul, MN, and was found as a GeoJSON file at <a href = "http://eric.clst.org/Stuff/USGeoJSON">http://eric.clst.org/Stuff/USGeoJSON</a>. 
+      </p>
+    </div>
+    
+      <script src="js/chart3.js"></script>	
+
+	</body>
+</html>

@@ -1,0 +1,89 @@
+	body {
+	  background-color: #80b3ff;
+	  font-family: arial;
+		margin-left: 15%;
+  	width: 70%;
+	}
+	
+	h1,h2, h3, h4 {
+		text-align: center;
+	}
+  
+  p {
+		text-align: justify;
+    text-justify: inter-word;
+	}
+
+  .chart {
+    background-color: white;
+    border: 1px solid gray;
+	}
+  
+  .chartContainer {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 10px;
+  }
+
+  .introduction {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 10px;
+  }
+
+	circle {
+    fill: #FF3333;
+    fill-opacity: 0.75;
+    stroke: gray;
+    stroke-width: 2;
+  }
+
+  .procedureCaption{
+    font-size: small;
+    fill: #000;
+  }
+
+  .hospitalbar{
+    fill: #FF3333;
+    fill-opacity: 0.70;
+  }
+  
+  .medicarebar{
+    fill: #1E64FA;
+    fill-opacity: 0.70;
+  }
+ 
+
+  .patientbar{
+    fill: #00b33c;
+    fill-opacity: 0.70;
+  }
+
+  .state{
+    stroke: gray;
+    stroke-linejoin: round;
+  }
+
+  #tooltip{
+    position: absolute;
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    padding: 5px;
+    background: white;
+    border: 1px solid black;
+    display: none;
+  }
+  
+  #tooltip2{
+    position: absolute;
+    text-align: center;
+    width: 500px;
+    height: 50px;
+    padding: 5px;
+    border: 1px solid black;
+    display: none;
+  }
+
